@@ -12,9 +12,25 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => false,
+            'rules' => [
+                'GET /me' => 'auth/me',
+                'POST /login' => 'auth/login',
+                'GET /users' => 'user/get-users',
+                'POST /users' => 'user/post-users',
+                'PATCH /users/<id:\d+>' => 'user/patch-user',
+                'DELETE /users/<id:\d+>' => 'user/delete-user',
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'Gj6jcVJSOtZjoVKvZxWs8oiVt_6_T7xc',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
